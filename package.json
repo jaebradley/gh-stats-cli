@@ -1,0 +1,83 @@
+{
+  "name": "gh-stats-cli",
+  "version": "0.0.0-development",
+  "description": "GitHub Contribution Statistics CLI",
+  "keywords": [
+    "github",
+    "statistics",
+    "cli",
+    "github statistics",
+    "github cli"
+  ],
+  "homepage": "https://github.com/jaebradley/gh-stats-cli#readme",
+  "bugs": {
+    "url": "https://github.com/jaebradley/gh-stats-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaebradley/gh-stats-cli.git"
+  },
+  "license": "MIT",
+  "main": "./build/index.js",
+  "bin": {
+    "gh-stats-cli": "./build/index.js"
+  },
+  "scripts": {
+    "build:development": "BABEL_ENV=development ./node_modules/.bin/rollup -c",
+    "build:production": "BABEL_ENV=production ./node_modules/.bin/rollup -c",
+    "codecov": "codecov",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "lint": "eslint --ext .js .",
+    "prepublishOnly": "npm run build:production",
+    "semantic-commit": "commit",
+    "semantic-release": "semantic-release",
+    "test": "jest",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "@octokit/rest": "^15.11.2",
+    "date-fns": "^1.29.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
+    "@babel/preset-env": "^7.0.0",
+    "@commitlint/cli": "^7.1.2",
+    "@commitlint/config-angular": "^7.1.2",
+    "@commitlint/prompt": "^7.1.2",
+    "@commitlint/prompt-cli": "^7.1.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-minify": "^0.4.3",
+    "codecov": "^3.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^0.14.3",
+    "jest": "^23.6.0",
+    "rollup": "^0.65.2",
+    "rollup-plugin-analyzer": "^2.1.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-babel-minify": "^6.0.0",
+    "rollup-plugin-cleaner": "^0.2.0",
+    "rollup-plugin-commonjs": "^9.1.6",
+    "rollup-plugin-filesize": "^4.0.1",
+    "rollup-plugin-includepaths": "^0.2.3",
+    "rollup-plugin-json": "^3.0.0",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-preserve-shebang": "^0.1.6",
+    "rollup-plugin-shebang": "^0.1.5",
+    "rollup-plugin-terser": "^2.0.2",
+    "semantic-release": "^15.9.15",
+    "travis-deploy-once": "^5.0.7"
+  },
+  "_id": "gh-stats-cli@0.0.0-development",
+  "global": true,
+  "readme": "ERROR: No README data found!"
+}

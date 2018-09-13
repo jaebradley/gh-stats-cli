@@ -1,0 +1,18 @@
+{
+  "env": {
+    "production": {
+      "presets": [
+       [
+         "@babel/env",
+          { "modules": false },
+          "minify"
+        ]
+      ]
+    }
+  },
+  "plugins": [],
+  "ignore": [
+    "node_modules/**",
+    "*.test.js"
+  ]
+}
