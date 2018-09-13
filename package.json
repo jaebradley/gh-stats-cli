@@ -44,7 +44,8 @@
     "commander": "^2.18.0",
     "date-fns": "^1.29.0",
     "inquirer": "^6.2.0",
-    "keytar": "^4.2.1"
+    "keytar": "^4.2.1",
+    "parse-github-url": "^1.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
