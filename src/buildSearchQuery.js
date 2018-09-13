@@ -1,3 +1,11 @@
+const formatParameters = ({ key, value }) => {
+  if (key === 'created') {
+    return `${key}:>=${value.toISOString().slice(0, 19)}Z`;
+  }
+
+  return `${key}:${value}`;
+};
+
 const buildSearchQuery = ({
   type = 'pr',
   user = null,
@@ -12,13 +20,13 @@ const buildSearchQuery = ({
     ...(user && { user }),
     ...(commenter && { commenter }),
     ...(author && { author }),
-    ...(createdBy && { createdBy: createdBy.toISOString() }),
+    ...(createdBy && { created: createdBy }),
     ...(organization && { org: organization }),
-    ...(user ** repository && { repo: `${user}/${repository}` }),
+    ...(user && repository && { repo: `${user}/${repository}` }),
   };
 
   return Object.keys(parameters)
-    .map(key => `${key}:${parameters(key)}`)
+    .map(key => formatParameters({ key, value: parameters[key] }))
     .join('+');
 };
 

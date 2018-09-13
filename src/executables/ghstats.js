@@ -7,5 +7,5 @@ import pkg from '../../package.json';
 program.version(pkg.version)
   .description('GitHub stats from the command line')
   .command('setup', 'add GitHub Personal Access Token')
-  .command('stats', 'get contribution stats from GitHub')
+  .command('week', 'get GitHub contribution stats over past 7 days')
   .parse(process.argv);
