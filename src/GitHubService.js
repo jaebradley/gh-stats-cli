@@ -19,7 +19,7 @@ class Searcher {
     } = response;
     while (this.client.hasNextPage(response)) {
       // eslint-disable-next-line no-await-in-loop
-      response = await octokit.getNextPage(response);
+      response = await this.client.getNextPage(response);
       data = data.concat(response.data);
     }
     return data;
@@ -81,6 +81,19 @@ class Searcher {
       owner,
       repo: repository,
     });
+  }
+
+  async getPRDetails({
+    owner,
+    repository,
+    number,
+  }) {
+    const response = await this.client.pullRequests.get({
+      number,
+      owner,
+      repo: repository,
+    });
+    return response.data;
   }
 }
 
