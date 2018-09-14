@@ -93,11 +93,11 @@ const getWeeklyContributionStats = async () => {
   });
 
   console.log('API Call Count', apiCallCount);
-  console.log(`Totals - ${totals.userCommentsCount} comments and ${totals.additions - totals.deletions} net new lines\n`);
+  console.log(`Totals - Left ${totals.userCommentsCount} comments on ${pullRequestsData.length} PRs and (hopefully) reviewed ${totals.additions - totals.deletions} net new lines\n`);
 
   const table = new Table({
     head: [
-      '',
+      'Commented PRs',
       'Title',
       'Your Comments',
       'Additions',
@@ -197,7 +197,7 @@ const getWeeklyContributionStats = async () => {
 
   const authoredPRTable = new Table({
     head: [
-      '',
+      'Authored PRs',
       'Title',
       'Additions',
       'Deletions',
