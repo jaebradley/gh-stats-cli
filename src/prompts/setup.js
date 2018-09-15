@@ -9,7 +9,7 @@ const setup = () => inquirer.prompt([
     name: 'personalAccessToken',
     message: 'Input your GitHub Personal Access Token',
     validate: token => validateExistence({ value: token, type: 'personal access token' }),
-    type: 'input',
+    type: 'password',
   },
 ]);
 
