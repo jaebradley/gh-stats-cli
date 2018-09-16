@@ -24,7 +24,7 @@
   },
   "scripts": {
     "codecov": "codecov",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "lint-commit-msg": "commitlint -e $GIT_PARAMS",
     "compile": "babel -d build/ src/ --ignore node_modules,*.test.js",
     "compile:prod": "BABEL_ENV=production npm run compile",
     "gc": "commit",
@@ -42,12 +42,13 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "@octokit/rest": "^15.11.2",
+    "chalk": "^2.4.1",
     "cli-table3": "^0.5.1",
     "commander": "^2.18.0",
-    "date-fns": "^1.29.0",
     "inquirer": "^6.2.0",
     "keytar": "^4.2.1",
-    "parse-github-url": "^1.0.2"
+    "parse-github-url": "^1.0.2",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -67,7 +68,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.14",
     "jest": "^23.6.0",
     "rollup": "^0.65.2",
     "rollup-plugin-analyzer": "^2.1.0",
@@ -87,6 +88,5 @@
     "travis-deploy-once": "^5.0.7"
   },
   "_id": "gh-stats-cli@0.0.0-development",
-  "global": true,
-  "readme": "ERROR: No README data found!"
+  "global": true
 }

@@ -2,12 +2,12 @@
 
 import getContributionStatistics from '../getContributionStatistics';
 import {
-  getWeekAgo,
+  getYesterday,
 } from '../utilities/date';
 
 const execute = async () => {
   try {
-    await getContributionStatistics(getWeekAgo());
+    await getContributionStatistics(getYesterday());
   } catch (error) {
     console.error('😞  Rut ro, an error occurred');
     console.error(error);

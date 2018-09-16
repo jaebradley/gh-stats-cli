@@ -4,7 +4,7 @@ import GitHubService from './GitHubService';
 
 class ContributionStatisticsService {
   static parsePullRequestInformation(pullRequests) {
-    pullRequests.map(({ html_url: htmlURL, number, title }) => {
+    return pullRequests.map(({ html_url: htmlURL, number, title }) => {
       const {
         owner,
         name: repository,
@@ -23,6 +23,35 @@ class ContributionStatisticsService {
     this.username = username;
   }
 
+  async getApiCallsEstimate({
+    createdAfter,
+    username,
+    organization = null,
+  }) {
+    const [
+      commentedPullRequests,
+      authoredPullRequests,
+    ] = await Promise.all([
+      this.github.getCommentedPRs({
+        createdAfter,
+        username,
+        organization,
+      }),
+      this.github.getAuthoredPRs({
+        createdAfter,
+        username,
+        organization,
+      }),
+    ]);
+
+    // TODO: @jaebradley - this does not take into account pagination for now
+    // (At least) 2 requests to get all commented and authored PRs
+    // A request per authored PR to get PR details
+    // A request per commented PR to get PR details
+    // A request per commented PR to get all comments (to calculate user's comments)
+    return 2 + authoredPullRequests.length + (2 * commentedPullRequests.length);
+  }
+
   async getPullRequestDetails({
     title,
     owner,
@@ -30,13 +59,16 @@ class ContributionStatisticsService {
     number,
   }) {
     const {
+      created_at: createdAt,
       merged,
+      merged_at: mergedAt,
       comments,
       review_comments: reviewComments,
       commits,
       additions,
       deletions,
       changed_files: changedFiles,
+      user,
     } = await this.github.getPRDetails({ owner, repository, number });
     return {
       title,
@@ -46,6 +78,9 @@ class ContributionStatisticsService {
       additions,
       deletions,
       changedFiles,
+      createdAt,
+      mergedAt,
+      authorUsername: user.login,
       isMerged: merged,
       commentsCount: comments,
       reviewCommentsCount: reviewComments,
@@ -73,37 +108,29 @@ class ContributionStatisticsService {
 
   async getCommentContributionStatistics({
     createdAfter,
-    createdBefore,
     username,
     organization = null,
   }) {
-    const {
-      items: commentedPullRequests,
-    } = await this.github.getCommentedPRs({
+    const commentedPullRequests = await this.github.getCommentedPRs({
       createdAfter,
-      createdBefore,
       username,
       organization,
     });
     const commentedPullRequestsInformation = ContributionStatisticsService
       .parsePullRequestInformation(commentedPullRequests);
 
-    return commentedPullRequestsInformation.map(
+    return Promise.all(commentedPullRequestsInformation.map(
       pullRequestInformation => this.getCommentedPullRequestDetails(pullRequestInformation),
-    );
+    ));
   }
 
   async getAuthorContributionStatistics({
     createdAfter,
-    createdBefore,
     username,
     organization = null,
   }) {
-    const {
-      items: authoredPullRequests,
-    } = await this.github.getAuthoredPRs({
+    const authoredPullRequests = await this.github.getAuthoredPRs({
       createdAfter,
-      createdBefore,
       username,
       organization,
     });
@@ -111,9 +138,9 @@ class ContributionStatisticsService {
     const authoredPullRequestInformation = ContributionStatisticsService
       .parsePullRequestInformation(authoredPullRequests);
 
-    return authoredPullRequestInformation.map(
+    return Promise.all(authoredPullRequestInformation.map(
       pullRequestInformation => this.getPullRequestDetails(pullRequestInformation),
-    );
+    ));
   }
 }
 
