@@ -2,7 +2,7 @@ import octokit from '@octokit/rest';
 
 import buildSearchQuery from './buildSearchQuery';
 
-class Searcher {
+class GitHubService {
   constructor(personalAccessToken) {
     this.client = octokit();
     this.client.authenticate({
@@ -25,23 +25,18 @@ class Searcher {
     return data;
   }
 
-  async getUsername() {
-    const {
-      data,
-    } = await this.client.users.get();
-    return data.login;
-  }
-
   async getCommentedPRs({
-    createdBy = null,
+    username,
+    createdAfter = null,
+    createdBefore = null,
     organization = null,
     sortBy = 'updated',
     orderBy = 'desc',
   }) {
-    const username = await this.getUsername();
     return this.paginate(this.client.search.issues, {
       q: buildSearchQuery({
-        createdBy,
+        createdAfter,
+        createdBefore,
         organization,
         commenter: username,
       }),
@@ -51,15 +46,17 @@ class Searcher {
   }
 
   async getAuthoredPRs({
-    createdBy = null,
+    username,
+    createdAfter = null,
+    createdBefore = null,
     organization = null,
     sortBy = 'updated',
     orderBy = 'desc',
   }) {
-    const username = await this.getUsername();
     return this.paginate(this.client.search.issues, {
       q: buildSearchQuery({
-        createdBy,
+        createdAfter,
+        createdBefore,
         organization,
         author: username,
       }),
@@ -72,9 +69,6 @@ class Searcher {
     owner,
     repository,
     number,
-    sort = null,
-    direction = null,
-    since = null,
   }) {
     return this.paginate(this.client.pullRequests.getComments, {
       number,
@@ -97,4 +91,4 @@ class Searcher {
   }
 }
 
-export default Searcher;
+export default GitHubService;

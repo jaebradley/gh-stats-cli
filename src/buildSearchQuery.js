@@ -1,6 +1,12 @@
+const getFormattedDateTime = datetime => datetime.toISOString().slice(0, 19);
+
 const formatParameters = ({ key, value }) => {
-  if (key === 'created') {
-    return `${key}:>=${value.toISOString().slice(0, 19)}Z`;
+  if (key === 'createdAfter') {
+    return `created:>=${getFormattedDateTime(value)}Z`;
+  }
+
+  if (key === 'createdBefore') {
+    return `created:<=${getFormattedDateTime(value)}Z`;
   }
 
   return `${key}:${value}`;
@@ -11,7 +17,8 @@ const buildSearchQuery = ({
   user = null,
   commenter = null,
   author = null,
-  createdBy = null,
+  createdAfter = null,
+  createdBefore = null,
   organization = null,
   repository = null,
 }) => {
@@ -20,7 +27,8 @@ const buildSearchQuery = ({
     ...(user && { user }),
     ...(commenter && { commenter }),
     ...(author && { author }),
-    ...(createdBy && { created: createdBy }),
+    ...(createdAfter && { createdAfter }),
+    ...(createdBefore && { createdBefore }),
     ...(organization && { org: organization }),
     ...(user && repository && { repo: `${user}/${repository}` }),
   };
