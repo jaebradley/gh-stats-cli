@@ -2,8 +2,8 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/gh-stats-cli.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/jaebradley/gh-stats-cli.svg?branch=master)](https://travis-ci.org/jaebradley/gh-stats-cli)
-[![npm](https://img.shields.io/npm/dt/gh-stats-cli.svg)](https://www.npmjs.com/package/gh-stats-cli)
-[![npm](https://img.shields.io/npm/v/gh-stats-cli.svg)](https://www.npmjs.com/package/gh-stats-cli)
+[![npm](https://img.shields.io/npm/dt/@jaebradley/gh-stats-cli.svg)](https://www.npmjs.com/package/@jaebradley/gh-stats-cli)
+[![npm](https://img.shields.io/npm/v/@jaebradley/gh-stats-cli.svg)](https://www.npmjs.com/package/@jaebradley/gh-stats-cli)
 
 Get simple `GitHub` `PR` contribution statistics (`PR`s authored and commented on) via the command line.
 
