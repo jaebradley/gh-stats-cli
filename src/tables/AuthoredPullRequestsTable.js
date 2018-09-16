@@ -10,8 +10,9 @@ import {
 } from './formatters';
 
 class AuthoredPullRequestsTable {
-  constructor(contributionData) {
-    this.contributionData = contributionData;
+  constructor({ data, shouldDisplayOrganizationInGitHubURL }) {
+    this.contributionData = data;
+    this.shouldDisplayOrganizationInGitHubURL = shouldDisplayOrganizationInGitHubURL;
 
     this.table = new Table({
       head: [
@@ -38,7 +39,7 @@ class AuthoredPullRequestsTable {
     }) => {
       this.table.push([
         formatPullRequestIdentifier({
-          owner,
+          ...(this.shouldDisplayOrganizationInGitHubURL && { owner }),
           repository,
           number,
         }),

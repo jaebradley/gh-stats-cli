@@ -117,8 +117,16 @@ const getContributionStatistics = async (createdAfter) => {
   ];
 
   const pullRequestsSummaryTable = new PullRequestsSummaryTable(combinedContributionTotals);
-  const authoredPullRequestsTable = new AuthoredPullRequestsTable(authorStatistics);
-  const commentedPullRequestsTable = new CommentedPullRequestsTable(commenterStatistics);
+
+  const shouldDisplayOrganizationInGitHubURL = !organization;
+  const authoredPullRequestsTable = new AuthoredPullRequestsTable({
+    shouldDisplayOrganizationInGitHubURL,
+    data: authorStatistics,
+  });
+  const commentedPullRequestsTable = new CommentedPullRequestsTable({
+    shouldDisplayOrganizationInGitHubURL,
+    data: commenterStatistics,
+  });
 
   console.log(pullRequestsSummaryTable.toString());
   console.log(authoredPullRequestsTable.toString());

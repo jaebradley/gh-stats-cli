@@ -12,8 +12,9 @@ import {
 } from './formatters';
 
 class CommentedPullRequestsTable {
-  constructor(contributionData) {
-    this.contributionData = contributionData;
+  constructor({ data, shouldDisplayOrganizationInGitHubURL }) {
+    this.contributionData = data;
+    this.shouldDisplayOrganizationInGitHubURL = shouldDisplayOrganizationInGitHubURL;
 
     this.table = new Table({
       head: [
@@ -44,7 +45,7 @@ class CommentedPullRequestsTable {
     }) => {
       this.table.push([
         formatPullRequestIdentifier({
-          owner,
+          ...(this.shouldDisplayOrganizationInGitHubURL && { owner }),
           repository,
           number,
         }),
