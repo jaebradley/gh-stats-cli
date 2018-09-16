@@ -10,7 +10,7 @@ Get simple `GitHub` `PR` contribution statistics (`PR`s authored and commented o
 ## Installation
 
 ```bash
-npm install --global gh-stats-cli
+npm install --global @jaebradley/gh-stats-cli
 ```
 
 ## Usage
