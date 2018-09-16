@@ -30,7 +30,9 @@ class ContributionStatisticsService {
     number,
   }) {
     const {
+      created_at: createdAt,
       merged,
+      merged_at: mergedAt,
       comments,
       review_comments: reviewComments,
       commits,
@@ -46,6 +48,8 @@ class ContributionStatisticsService {
       additions,
       deletions,
       changedFiles,
+      createdAt,
+      mergedAt,
       isMerged: merged,
       commentsCount: comments,
       reviewCommentsCount: reviewComments,
