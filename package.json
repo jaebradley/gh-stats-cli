@@ -1,5 +1,8 @@
 {
-  "name": "gh-stats-cli",
+  "name": "@jaebradley/gh-stats-cli",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0-development",
   "description": "GitHub Contribution Statistics CLI",
   "keywords": [
