@@ -4,7 +4,7 @@ import GitHubService from './GitHubService';
 
 class ContributionStatisticsService {
   static parsePullRequestInformation(pullRequests) {
-    pullRequests.map(({ html_url: htmlURL, number, title }) => {
+    return pullRequests.map(({ html_url: htmlURL, number, title }) => {
       const {
         owner,
         name: repository,
@@ -77,15 +77,11 @@ class ContributionStatisticsService {
 
   async getCommentContributionStatistics({
     createdAfter,
-    createdBefore,
     username,
     organization = null,
   }) {
-    const {
-      items: commentedPullRequests,
-    } = await this.github.getCommentedPRs({
+    const commentedPullRequests = await this.github.getCommentedPRs({
       createdAfter,
-      createdBefore,
       username,
       organization,
     });
@@ -99,15 +95,11 @@ class ContributionStatisticsService {
 
   async getAuthorContributionStatistics({
     createdAfter,
-    createdBefore,
     username,
     organization = null,
   }) {
-    const {
-      items: authoredPullRequests,
-    } = await this.github.getAuthoredPRs({
+    const authoredPullRequests = await this.github.getAuthoredPRs({
       createdAfter,
-      createdBefore,
       username,
       organization,
     });
@@ -115,9 +107,9 @@ class ContributionStatisticsService {
     const authoredPullRequestInformation = ContributionStatisticsService
       .parsePullRequestInformation(authoredPullRequests);
 
-    return authoredPullRequestInformation.map(
+    return Promise.all(authoredPullRequestInformation.map(
       pullRequestInformation => this.getPullRequestDetails(pullRequestInformation),
-    );
+    ));
   }
 }
 

@@ -1,25 +1,25 @@
 import Table from 'cli-table3';
 
 import {
-  formatPullRequestStatus,
+  formatPullRequestIdentifier,
   formatPullRequestTitle,
   formatPullRequestChanges,
   formatPullRequestCreationTime,
   formatPullRequestMergeTime,
+  formatHeader,
 } from './formatters';
 
 class AuthoredPullRequestsTable {
-  constructor({ contributionType, contributionData }) {
-    this.contributionType = contributionType;
+  constructor(contributionData) {
     this.contributionData = contributionData;
 
     this.table = new Table({
       head: [
-        'Authored PRs',
-        '🏷️',
-        '✏️',
-        '📅',
-        '🚢',
+        formatHeader('Authored PRs'),
+        formatHeader('Title'),
+        formatHeader('Changes'),
+        formatHeader('Created At'),
+        formatHeader('Merged At'),
       ],
     });
   }
@@ -33,13 +33,11 @@ class AuthoredPullRequestsTable {
       additions,
       deletions,
       changedFiles,
-      isMerged,
       mergedAt,
       createdAt,
     }) => {
       this.table.push([
-        formatPullRequestStatus({
-          isMerged,
+        formatPullRequestIdentifier({
           owner,
           repository,
           number,

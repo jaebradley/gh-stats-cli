@@ -11,6 +11,23 @@ class GitHubService {
     });
   }
 
+  async paginateSearchResults(method, args) {
+    let response = await method(args);
+
+    const {
+      data,
+    } = response;
+    let {
+      items,
+    } = data;
+    while (this.client.hasNextPage(response)) {
+      // eslint-disable-next-line no-await-in-loop
+      response = await this.client.getNextPage(response);
+      items = items.concat(response.data.items);
+    }
+    return items;
+  }
+
   async paginate(method, args) {
     let response = await method(args);
 
@@ -33,7 +50,7 @@ class GitHubService {
     sortBy = 'updated',
     orderBy = 'desc',
   }) {
-    return this.paginate(this.client.search.issues, {
+    return this.paginateSearchResults(this.client.search.issues, {
       q: buildSearchQuery({
         createdAfter,
         createdBefore,
@@ -53,7 +70,7 @@ class GitHubService {
     sortBy = 'updated',
     orderBy = 'desc',
   }) {
-    return this.paginate(this.client.search.issues, {
+    return this.paginateSearchResults(this.client.search.issues, {
       q: buildSearchQuery({
         createdAfter,
         createdBefore,
