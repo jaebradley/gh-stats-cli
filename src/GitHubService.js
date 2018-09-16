@@ -42,6 +42,13 @@ class GitHubService {
     return data;
   }
 
+  async getUsername() {
+    const {
+      data,
+    } = await this.client.users.get();
+    return data.login;
+  }
+
   async getCommentedPRs({
     username,
     createdAfter = null,
