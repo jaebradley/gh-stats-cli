@@ -5,6 +5,7 @@ import {
 
 import executeSetup from './setup';
 import query from './prompts/query';
+import confirmEstimatedApiCalls from './prompts/confirmEstimatedApiCalls';
 import {
   CONTRIBUTION_TYPE,
 } from './constants';
@@ -69,6 +70,20 @@ const getContributionStatistics = async (createdAfter) => {
     personalAccessToken,
     username: specifiedUsername,
   });
+
+  const estimatedApiCalls = await contributionStatisticsService.getApiCallsEstimate({
+    createdAfter,
+    organization,
+    username: specifiedUsername,
+  });
+
+  const {
+    confirmEstimatedApiCalls: userHasConfirmedApiCallUsage,
+  } = await confirmEstimatedApiCalls(estimatedApiCalls);
+
+  if (!userHasConfirmedApiCallUsage) {
+    return;
+  }
 
   const [
     authorStatistics,

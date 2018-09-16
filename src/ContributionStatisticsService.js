@@ -23,6 +23,35 @@ class ContributionStatisticsService {
     this.username = username;
   }
 
+  async getApiCallsEstimate({
+    createdAfter,
+    username,
+    organization = null,
+  }) {
+    const [
+      commentedPullRequests,
+      authoredPullRequests,
+    ] = await Promise.all([
+      this.github.getCommentedPRs({
+        createdAfter,
+        username,
+        organization,
+      }),
+      this.github.getAuthoredPRs({
+        createdAfter,
+        username,
+        organization,
+      }),
+    ]);
+
+    // TODO: @jaebradley - this does not take into account pagination for now
+    // (At least) 2 requests to get all commented and authored PRs
+    // A request per authored PR to get PR details
+    // A request per commented PR to get PR details
+    // A request per commented PR to get all comments (to calculate user's comments)
+    return 2 + authoredPullRequests.length + (2 * commentedPullRequests.length);
+  }
+
   async getPullRequestDetails({
     title,
     owner,
