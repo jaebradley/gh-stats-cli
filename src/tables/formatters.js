@@ -3,7 +3,7 @@ import wrap from 'word-wrap';
 import dateFormat from 'date-fns/format';
 
 const formatDateTime = dateTime => `${dateFormat(dateTime, 'YYYY-MM-DD')}\n${dateFormat(dateTime, 'h:mm A Z')}`;
-const formatPullRequestIdentifier = ({ owner, repository, number }) => `${chalk.underline.bold(`${chalk.blueBright(owner)}/${chalk.yellowBright(repository)}${chalk.cyanBright('#')}${chalk.magentaBright(number)}`)}`;
+const formatPullRequestIdentifier = ({ owner, repository, number }) => `${chalk.underline.bold(`${(owner && `${chalk.blueBright(owner)}/`) || ''}${chalk.yellowBright(repository)}${chalk.cyanBright('#')}${chalk.magentaBright(number)}`)}`;
 const formatPullRequestTitle = title => chalk.bold.cyan(wrap(title));
 const formatPullRequestChanges = ({ additions, deletions, changedFiles }) => `${chalk.bold(
   `${chalk.greenBright(`+${additions.toLocaleString()}`)}, ${chalk.redBright(`-${deletions.toLocaleString()}`)} (${chalk.cyanBright((additions - deletions).toLocaleString())})\n${chalk.magentaBright(`${changedFiles.toLocaleString()} files`)}`,
