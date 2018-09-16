@@ -48,7 +48,8 @@
     "date-fns": "^1.29.0",
     "inquirer": "^6.2.0",
     "keytar": "^4.2.1",
-    "parse-github-url": "^1.0.2"
+    "parse-github-url": "^1.0.2",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

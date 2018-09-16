@@ -8,6 +8,7 @@ import query from './prompts/query';
 
 import ContributionStatisticsService from './ContributionStatisticsService';
 import AuthoredPullRequestsTable from './tables/AuthoredPullRequestsTable';
+import CommentedPullRequestsTable from './tables/CommentedPullRequestsTable';
 
 const getContributionStatistics = async (createdAfter) => {
   let personalAccessToken = await getPersonalAccessToken();
@@ -27,15 +28,30 @@ const getContributionStatistics = async (createdAfter) => {
 
   const contributionStatisticsService = new ContributionStatisticsService({
     personalAccessToken,
-    specifiedUsername,
-  });
-  const authorStatistics = await contributionStatisticsService.getAuthorContributionStatistics({
-    createdAfter,
-    organization,
     username: specifiedUsername,
   });
-  const table = new AuthoredPullRequestsTable(authorStatistics);
-  console.log(table.toString());
+
+  const [
+    authorStatistics,
+    commenterStatistics,
+  ] = await Promise.all([
+    contributionStatisticsService.getAuthorContributionStatistics({
+      createdAfter,
+      organization,
+      username: specifiedUsername,
+    }),
+    contributionStatisticsService.getCommentContributionStatistics({
+      createdAfter,
+      organization,
+      username: specifiedUsername,
+    }),
+  ]);
+
+  const authoredPullRequestsTable = new AuthoredPullRequestsTable(authorStatistics);
+  const commentedPullRequestsTable = new CommentedPullRequestsTable(commenterStatistics);
+
+  console.log(authoredPullRequestsTable.toString());
+  console.log(commentedPullRequestsTable.toString());
 };
 
 export default getContributionStatistics;

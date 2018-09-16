@@ -39,6 +39,7 @@ class ContributionStatisticsService {
       additions,
       deletions,
       changed_files: changedFiles,
+      user,
     } = await this.github.getPRDetails({ owner, repository, number });
     return {
       title,
@@ -50,6 +51,7 @@ class ContributionStatisticsService {
       changedFiles,
       createdAt,
       mergedAt,
+      authorUsername: user.login,
       isMerged: merged,
       commentsCount: comments,
       reviewCommentsCount: reviewComments,
@@ -88,9 +90,9 @@ class ContributionStatisticsService {
     const commentedPullRequestsInformation = ContributionStatisticsService
       .parsePullRequestInformation(commentedPullRequests);
 
-    return commentedPullRequestsInformation.map(
+    return Promise.all(commentedPullRequestsInformation.map(
       pullRequestInformation => this.getCommentedPullRequestDetails(pullRequestInformation),
-    );
+    ));
   }
 
   async getAuthorContributionStatistics({

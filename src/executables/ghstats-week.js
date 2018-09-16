@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
-import getWeeklyContributionStats from '../getWeeklyContributionStats';
+import getContributionStatistics from '../getContributionStatistics';
+import {
+  getWeekAgo,
+} from '../utilities/date';
 
 const execute = async () => {
   try {
-    await getWeeklyContributionStats();
+    await getContributionStatistics(getWeekAgo());
   } catch (error) {
     console.error('😞  Rut ro, an error occurred');
     console.error(error);
