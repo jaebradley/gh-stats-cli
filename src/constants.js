@@ -4,5 +4,6 @@ const CONTRIBUTION_TYPE = Object.freeze({
 });
 
 export {
+  // eslint-disable-next-line import/prefer-default-export
   CONTRIBUTION_TYPE,
 };

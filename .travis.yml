@@ -7,6 +7,10 @@ notifications:
 node_js:
   - 'node'
   - 'lts/*'
+addons:
+  apt:
+    packages:
+      - libsecret-1-dev
 install: npm install
 before_install:
   - npm install -g greenkeeper-lockfile@1
@@ -14,7 +18,7 @@ jobs:
   include:
     - stage: test
       script:
-        - npm run build:production
+        - npm run compile:prod
         - npm run lint
         - npm run test
       before_script: greenkeeper-lockfile-update
