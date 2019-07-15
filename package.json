@@ -61,7 +61,7 @@
     "@babel/plugin-transform-async-to-generator": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "@commitlint/cli": "^7.1.2",
+    "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^7.1.2",
     "@commitlint/prompt": "^7.1.2",
     "@commitlint/prompt-cli": "^7.1.2",
