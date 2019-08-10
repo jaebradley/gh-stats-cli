@@ -71,7 +71,7 @@
     "babel-preset-minify": "^0.5.0",
     "codecov": "^3.1.0",
     "eslint": "^5.6.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.0.0-rc.14",
     "jest": "^23.6.0",
