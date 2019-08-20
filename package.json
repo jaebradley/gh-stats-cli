@@ -48,7 +48,7 @@
     "chalk": "^2.4.1",
     "cli-table3": "^0.5.1",
     "commander": "^2.18.0",
-    "date-fns": "^1.29.0",
+    "date-fns": "^2.0.0",
     "inquirer": "^6.2.0",
     "keytar": "^4.2.1",
     "parse-github-url": "^1.0.2",
