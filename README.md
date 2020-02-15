@@ -4,7 +4,6 @@
 [![Build Status](https://travis-ci.org/jaebradley/gh-stats-cli.svg?branch=master)](https://travis-ci.org/jaebradley/gh-stats-cli)
 [![codecov](https://codecov.io/gh/jaebradley/gh-stats-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/jaebradley/gh-stats-cli)
 [![npm](https://img.shields.io/npm/v/@jaebradley/gh-stats-cli.svg)](https://www.npmjs.com/package/@jaebradley/gh-stats-cli)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@jaebradley/gh-stats-cli)
 [![npm-total-downloads](https://img.shields.io/npm/dt/@jaebradley/gh-stats-cli.svg)](https://www.npmjs.com/package/@jaebradley/gh-stats-cli)
 ![GitHub](https://img.shields.io/github/license/jaebradley/gh-stats-cli)
 
