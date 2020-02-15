@@ -1,4 +1,4 @@
-const getFormattedDateTime = datetime => datetime.toISOString().slice(0, 19);
+const getFormattedDateTime = (datetime) => datetime.toISOString().slice(0, 19);
 
 const formatParameters = ({ key, value }) => {
   if (key === 'createdAfter') {
@@ -34,7 +34,7 @@ const buildSearchQuery = ({
   };
 
   return Object.keys(parameters)
-    .map(key => formatParameters({ key, value: parameters[key] }))
+    .map((key) => formatParameters({ key, value: parameters[key] }))
     .join('+');
 };
 

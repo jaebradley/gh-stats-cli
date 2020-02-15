@@ -120,7 +120,7 @@ class ContributionStatisticsService {
       .parsePullRequestInformation(commentedPullRequests);
 
     return Promise.all(commentedPullRequestsInformation.map(
-      pullRequestInformation => this.getCommentedPullRequestDetails(pullRequestInformation),
+      (pullRequestInformation) => this.getCommentedPullRequestDetails(pullRequestInformation),
     ));
   }
 
@@ -139,7 +139,7 @@ class ContributionStatisticsService {
       .parsePullRequestInformation(authoredPullRequests);
 
     return Promise.all(authoredPullRequestInformation.map(
-      pullRequestInformation => this.getPullRequestDetails(pullRequestInformation),
+      (pullRequestInformation) => this.getPullRequestDetails(pullRequestInformation),
     ));
   }
 }
