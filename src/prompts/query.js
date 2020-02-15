@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-const query = defaultUsername => inquirer.prompt([
+const query = (defaultUsername) => inquirer.prompt([
   {
     name: 'username',
     message: 'Input a username to lookup statistics for',
