@@ -42,7 +42,7 @@
     "@babel/runtime": "^7.8.4",
     "@octokit/rest": "^16.43.1",
     "chalk": "^3.0.0",
-    "cli-table3": "^0.5.1",
+    "cli-table3": "^0.6.0",
     "commander": "^4.1.1",
     "date-fns": "^2.9.0",
     "inquirer": "^7.0.4",
