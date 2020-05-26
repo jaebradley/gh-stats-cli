@@ -39,7 +39,7 @@
     "travis-deploy-once": "npx travis-deploy-once"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.4",
+    "@babel/runtime": "^7.10.0",
     "@octokit/rest": "^16.43.1",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
