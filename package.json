@@ -46,7 +46,7 @@
     "commander": "^4.1.1",
     "date-fns": "^2.9.0",
     "inquirer": "^7.0.4",
-    "keytar": "^5.2.0",
+    "keytar": "^7.1.0",
     "parse-github-url": "^1.0.2",
     "word-wrap": "^1.2.3"
   },
